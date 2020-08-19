@@ -184,12 +184,7 @@ try:
     myPin = Pin()
     myFan = Fan()
     myTemp = Temperature()
-    while True:
-        myTemp.checkTemperature(myFan, myPin)
 
-        # Read the temperature every N sec (sleepTime)
-        # Turning a device on & off can wear it out
-        time.sleep(sleepTime)
 
 except KeyboardInterrupt: # trap a CTRL+C keyboard interrupt
     printMsg("keyboard exception occurred")
