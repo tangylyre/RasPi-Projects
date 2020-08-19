@@ -92,7 +92,7 @@ import datetime
 #########################
 sleepTime = 30	# Time to sleep between checking the temperature
                 # want to write unbuffered to file
-fileLog = open('/home/osmc/run-fan.log', 'w+', 0)
+fileLog = open('/home/pi/RasPi-Projects/3 Pin/run-fan.log', 'w', 0)
 
 #########################
 # Log messages should be time stamped
