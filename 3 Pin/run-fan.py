@@ -184,7 +184,7 @@ try:
     myPin = Pin()
     myFan = Fan()
     myTemp = Temperature()
-    myFan.setFan(self.cpuTemperature, True, myPin)
+    myPin.set(on)
     while True:
         # Read the temperature every N sec (sleepTime)
         # Turning a device on & off can wear it out
