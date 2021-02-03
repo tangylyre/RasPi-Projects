@@ -10,6 +10,12 @@ for line in f:
     adv.append(line.strip())
 f.close()
 
+f = open("adverbs.txt", "r")
+conj = []
+for line in f:
+    conj.append(line.strip())
+f.close()
+
 f = open("adjectives.txt", "r")
 adj = []
 for line in f:
@@ -31,13 +37,34 @@ f.close()
 print("starting spam..")
 sleep(1)
 q = False
+
+
+def makeRand(lis):
+    return lis[randrange(len(lis))]
+def makeDelay():
+    return randrange(150)/1000
+
+def makeStr(n, adj, verb, adv, noun):
+    if n < 1:
+        string = "crikey!"
+    elif n == 1:
+        string = ("%s %s %s %s %s %s %s." % (
+            makeRand(adj), makeRand(adj), makeRand(adj), makeRand(verb),
+            makeRand(noun), makeRand(conj), makeRand(noun)))
+    elif n == 2:
+        string = ("%s %s %s %s %s." % (makeRand(noun), makeRand(adv), makeRand(verb), makeRand(adj), makeRand(noun)))
+    elif n == 3:
+        string = ("%s %s %s %s %s." % (makeRand(conj), makeRand(noun), makeRand(verb), makeRand(adj), makeRand(noun)))
+
+    return string
+
+
 while not q:
-    radj = randrange(len(adj))
-    radv = randrange(len(adv))
-    rnoun = randrange(len(noun))
-    rnoun2 = randrange(len(noun))
-    rverb = randrange(len(verb))
-    sleep(randrange(10))
-    s = ("%s %s %s %s %s." % (noun[rnoun], adv[radv], verb[rverb], adj[radj], noun[rnoun2]))
-    write(s)
+    if key('q'):
+        write('\n')
+        print("Stopping!")
+        q = True
+    sleep(randrange(50))
+    s = makeStr(randrange(3), adj, verb, adv, noun)
+    write(s, makeDelay())
     pr('Enter')
