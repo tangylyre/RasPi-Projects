@@ -1,0 +1,6 @@
+irc.chat.twitch.tv
+6667
+tangylyre
+oauth:rn5gfh4l1ajjg9bvuljrole5p7i1cr
+#tangylyre
+
