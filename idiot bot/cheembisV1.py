@@ -1,6 +1,8 @@
 import socket
 import time
 import random
+import tkinter
+from tkinter import filedialog
 
 from idiot import *
 
@@ -12,10 +14,14 @@ adv = getAdv()
 conj = getConj()
 banter = getBanter()
 
-try:
-    f = open(input("please input the text file to read from:\n"))
-except FileNotFoundError:
-    f = open("instance.txt")
+f = filedialog.askopenfilename(title="Select a Bot Profile",
+                               filetypes=(("Text files",
+                                           "*.txt*"),
+                                          ("all files",
+                                           "*.*")))
+print(f)
+if f == '':
+    f = open("cheembisProfile.txt")
 
 instance = []
 i = 0

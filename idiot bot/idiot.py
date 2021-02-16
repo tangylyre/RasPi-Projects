@@ -52,6 +52,15 @@ def getVerb():
     return verb
 
 
+def getBanter():
+    f = open("banter.txt", "r")
+    banter = []
+    for line in f:
+        banter.append(line.strip())
+    f.close()
+    return banter
+
+
 def reloadEpic():
     f = open("shitpost.txt", "r")
     epic = []
@@ -94,6 +103,17 @@ def makeStr(n, adj, verb, adv, noun, epic, conj, log):
             string = makeRand(log)
 
     return string, epic
+
+
+def makeBanter(banter, u):
+    if len(banter) == 0:
+        banter = getBanter()
+    x = randrange(len(banter))
+    phrase = banter[x]
+    banter.pop(x)
+    if '%' in phrase:
+        phrase = phrase.replace('%', u)
+    return phrase, banter
 
 
 def chat(sock, CHAN, msg):
