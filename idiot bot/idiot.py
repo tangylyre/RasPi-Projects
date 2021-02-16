@@ -76,19 +76,30 @@ def makeDelay(d):
     return randrange(d) / 1000
 
 
-def makeStr(n, adj, verb, adv, noun, epic, conj):
-    if n < 2:
+def makeStr(n, adj, verb, adv, noun, epic, conj, log):
+    if n < 10:
         string, epic = makeRandPop(epic)
-    elif n == 3:
+    elif n == 11:
         string = ("%s %s %s %s %s %s %s." % (
             makeRand(adj), makeRand(adj), makeRand(adj), makeRand(verb),
             makeRand(noun), makeRand(conj), makeRand(noun)))
-    elif n == 4:
+    elif n == 12:
         string = ("%s %s %s %s %s." % (makeRand(noun), makeRand(adv), makeRand(verb), makeRand(adj), makeRand(noun)))
-    elif n == 5:
+    elif n == 13:
         string = ("%s %s %s %s %s." % (makeRand(conj), makeRand(noun), makeRand(verb), makeRand(adj), makeRand(noun)))
+    else:
+        if len(log) == 0:
+            string, epic = makeRandPop(epic)
+        else:
+            string = makeRand(log)
 
     return string, epic
+
+
+def chat(sock, CHAN, msg):
+    m = "PRIVMSG {} :{}\r\n".format(CHAN, msg).encode("utf-8")
+    sock.send(m)
+    return
 
 
 def main():

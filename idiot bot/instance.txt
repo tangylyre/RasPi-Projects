@@ -3,4 +3,7 @@ irc.chat.twitch.tv
 tangylyre
 oauth:rn5gfh4l1ajjg9bvuljrole5p7i1cr
 #tangylyre
+10
+5
+50
 
