@@ -14,11 +14,11 @@ adv = getAdv()
 conj = getConj()
 banter = getBanter()
 
-f = filedialog.askopenfilename(title="Select a Bot Profile",
+f = open(filedialog.askopenfilename(title="Select a Bot Profile",
                                filetypes=(("Text files",
                                            "*.txt*"),
                                           ("all files",
-                                           "*.*")))
+                                           "*.*"))))
 print(f)
 if f == '':
     f = open("cheembisProfile.txt")
@@ -58,8 +58,10 @@ log.close()
 
 q = False
 count = random.randint(countMin, countMax)
-
+m, epic = makeStr(randrange(20), adj, verb, adv, noun, epic, conj, logLs)
+chat(sock, channel, m)
 while not q:
+    print(count)
     s = ''
     try:
         resp = sock.recv(2048).decode('utf-8')

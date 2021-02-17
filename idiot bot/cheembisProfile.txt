@@ -2,8 +2,8 @@ irc.chat.twitch.tv
 6667
 cheembis
 oauth:oywsoykd6mfwtt6q9xow39jb7ambkg
-#tangylyre
+#jebsilad
 10
 5
-50
+20
 
