@@ -70,6 +70,15 @@ def reloadEpic():
     return epic
 
 
+def makeCumbank():
+    f = open("cum.txt", "r")
+    epic = []
+    for line in f:
+        epic.append(line.strip())
+    f.close()
+    return epic
+
+
 def makeRand(lis):
     return lis[randrange(len(lis))]
 
@@ -116,10 +125,58 @@ def makeBanter(banter, u):
     return phrase, banter
 
 
+def cumCheck(s, cumBank):
+    orgasm = False
+    for phrase in cumBank:
+        if phrase in s:
+            print(phrase)
+            orgasm = True
+    return orgasm
+
+
 def chat(sock, CHAN, msg):
     m = "PRIVMSG {} :{}\r\n".format(CHAN, msg).encode("utf-8")
     sock.send(m)
     return
+
+
+def storeResponse(m):
+    f = open('banter.txt', 'r')
+    repeat = False
+    for line in f:
+        print(line)
+        print(m)
+        if m in line:
+            repeat = True
+    if not repeat:
+        f.close()
+        f = open('banter.txt', 'a')
+        f.write(m + '\n')
+    f.close()
+    return repeat
+
+
+def deletePhrase(m):
+    files = ['chat.txt', 'shitpost.txt', 'banter.txt']
+    found = False
+    for file in files:
+        l = []
+        f = open(file, 'r')
+        for line in f:
+            if m in line:
+                found = True
+            else:
+                l.append(line)
+        f.close()
+        if found:
+            f = open(file, 'w+')
+            for line in l:
+                f.write(line)
+            return file
+    return ''
+    # rewrite file without the phrase
+
+    pass
 
 
 def main():

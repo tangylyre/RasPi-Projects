@@ -13,12 +13,14 @@ noun = getNoun()
 adv = getAdv()
 conj = getConj()
 banter = getBanter()
+cumBank = makeCumbank()
+cumResponse = ['*cums*', '*ejaculates*', '*cries*', '*orgasms*']
 
 f = open(filedialog.askopenfilename(title="Select a Bot Profile",
-                               filetypes=(("Text files",
-                                           "*.txt*"),
-                                          ("all files",
-                                           "*.*"))))
+                                    filetypes=(("Text files",
+                                                "*.txt*"),
+                                               ("all files",
+                                                "*.*"))))
 print(f)
 if f == '':
     f = open("cheembisProfile.txt")
@@ -70,15 +72,26 @@ while not q:
     l = resp.split(':')
     if len(l) >= 2 and '!' in l[1]:
         u = l[1].split('!')[0]
-        s = l[2].replace('\n', '').replace('\r', '')
+        s = l[2].replace('\n', '').replace('\r', '').lower()
         if 'twitch.tv' in s or 'Welcome, GLHF!' in s:
             s = ''
     if 'time for bed %s' % nick in s:
         q = True
         chat(sock, channel, "cya nerds")
+    elif 'do not say that again %s' % nick in s:
+        chat(sock, channel, "ok libtard.")
+        fileRevise = deletePhrase(m)
+        print('%s was found in %s' % m, fileRevise)
+    elif cumCheck(s, cumBank):
+        m = cumResponse[randrange(len(cumResponse))]
+        chat(sock, channel, m)
     elif nick in s:
         m, banter = makeBanter(banter, u)
-        chat(sock, channel, m)
+        rp = storeResponse(s.replace(nick, '%'))
+        if rp:
+            chat(sock, channel, ('come up with something new, %s' % u))
+        else:
+            chat(sock, channel, m)
     elif len(s) > 2:
         unique = True
         for phrase in logLs:
