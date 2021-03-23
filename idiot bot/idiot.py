@@ -114,6 +114,19 @@ def makeStr(n, adj, verb, adv, noun, epic, conj, log):
     return string, epic
 
 
+def makeSmart(adj, adv, verb, noun, conj):
+    n = randrange(1, 3)
+    if n == 1:
+        string = ("%s %s %s %s %s %s %s." % (
+            makeRand(adj), makeRand(adj), makeRand(adj), makeRand(verb),
+            makeRand(noun), makeRand(conj), makeRand(noun)))
+    if n == 2:
+        string = ("%s %s %s %s %s." % (makeRand(noun), makeRand(adv), makeRand(verb), makeRand(adj), makeRand(noun)))
+    if n == 3:
+        string = ("%s %s %s %s %s." % (makeRand(conj), makeRand(noun), makeRand(verb), makeRand(adj), makeRand(noun)))
+    return string
+
+
 def makeBanter(banter, u):
     if len(banter) == 0:
         banter = getBanter()
@@ -144,8 +157,6 @@ def storeResponse(m):
     f = open('banter.txt', 'r')
     repeat = False
     for line in f:
-        print(line)
-        print(m)
         if m in line:
             repeat = True
     if not repeat:
@@ -156,6 +167,34 @@ def storeResponse(m):
     return repeat
 
 
+def deleteDictionary(m):
+    words = m.replace('.', '').split(' ')
+    print(words)
+    files = ['conj.txt', 'nouns.txt', 'adverbs.txt', 'adjectives.txt', 'verbs.txt']
+    for file in files:
+        l = []
+        f = open(file, 'r')
+        for line in f:
+            found = False
+            for word in words:
+                if word == line.replace('\n', ''):
+                    print("word %s" % word)
+                    print("matches line %s" % line)
+                    print("in file %s" % file)
+                    words.remove(word)
+                    found = True
+            if not found:
+                l.append(line)
+        f.close()
+        f = open(file, 'w')
+        for line in l:
+            f.write(line)
+        f.close()
+    if len(words) <= 0:
+        return True
+    return False
+
+
 def deletePhrase(m):
     files = ['chat.txt', 'shitpost.txt', 'banter.txt']
     found = False
@@ -163,20 +202,127 @@ def deletePhrase(m):
         l = []
         f = open(file, 'r')
         for line in f:
-            if m in line:
+            if line.replace('\n', '') == m:
+                print("Message %s \n" % m)
+                print("Matches %s." % line.replace('\n', ''))
                 found = True
             else:
                 l.append(line)
         f.close()
         if found:
-            f = open(file, 'w+')
+            print("Word was found in file %s." % file)
+            f = open(file, 'w')
             for line in l:
                 f.write(line)
+            f.close()
             return file
-    return ''
-    # rewrite file without the phrase
+    bool = deleteDictionary(m)
+    if bool:
+        print("words found in dictionary deleted.")
+        return True
+    print("Word in file not found.")
+    return False
 
-    pass
+
+def makeAbout(phrase):
+    files = ['chat.txt', 'shitpost.txt', 'banter.txt']
+    found = False
+    mbank = []
+    for file in files:
+        l = []
+        f = open(file, 'r')
+        for line in f:
+            if phrase in line:
+                found = True
+                print("%s was found \nin %s" % (phrase, line))
+                mbank.append(line.replace('\n', ''))
+    if not found:
+        m = "I dont know anything about %s" % phrase
+    else:
+        m = mbank[randrange(len(mbank))]
+    return m
+
+
+def phraseMutator(nPhrases):
+    punctuation = ['.', ',', '?', '!', '\n']
+    files = ['chat.txt', 'shitpost.txt']
+    wordbank = []
+    i = 0
+    while i <= nPhrases:
+        file = files[randrange(0, 2)]
+        f = open(file, 'r')
+        lines = f.readlines()
+        phrase = lines[randrange(len(lines))]
+        if '\x00' not in phrase:
+            for x in punctuation:
+                phrase = phrase.replace(x, '')
+            words = phrase.split(" ")
+            if len(words) > 1:
+                print(words)
+                for word in words:
+                    wordbank.append(word)
+                i += 1
+    n = randrange(len(wordbank))
+    newPhrase = wordbank[n]
+    wordbank.pop(n)
+    while len(wordbank) > 0:
+        n = randrange(len(wordbank))
+        toMerge = (newPhrase, wordbank[n])
+        newPhrase = " ".join(toMerge)
+        wordbank.pop(n)
+    return newPhrase
+
+
+def phraseInList(ls, phrase):
+    result = False
+    for element in ls:
+        if element in phrase:
+            result = True
+    return result
+
+
+def cheembisParser(s, nick, sock, channel, adj, adv, verb, noun, conj, banter, u, m, count):
+    cumBank = makeCumbank()
+    cumResponse = ['*cums*', '*ejaculates*', '*cries*', '*orgasms*']
+    bedBank = ['time for bed %s' % nick, '%s time for bed' % nick]
+    delBank = ['do not say that again %s' % nick, '%s do not say that again' % nick]
+    promptBank = ['say something %s' % nick, '%s say something' % nick]
+    smartBank = ['say something smart %s' % nick, '%s say something smart' % nick]
+    aboutBank = ['%s say something about ' % nick, 'say something about ']
+    newBank = ['%s say something new' % nick, 'say something new %s' % nick]
+    detect = True
+    q = False
+    if phraseInList(bedBank, s):
+        q = True
+        chat(sock, channel, "cya nerds")
+    elif phraseInList(newBank, s):
+        m = phraseMutator(2)
+        chat(sock, channel, m)
+    elif phraseInList(delBank, s):
+        chat(sock, channel, "ok libtard.")
+        deletePhrase(m)
+    elif phraseInList(smartBank, s):
+        m = makeSmart(adj, adv, verb, noun, conj)
+        chat(sock, channel, m)
+    elif phraseInList(aboutBank, s):
+        phrase = s.replace('%s say something about ' % nick, '').replace('say something about ', '')
+        m = makeAbout(phrase)
+        chat(sock, channel, m)
+    elif phraseInList(promptBank, s):
+        count = 0
+    elif cumCheck(s, cumBank):
+        m = cumResponse[randrange(len(cumResponse))]
+        chat(sock, channel, m)
+    elif nick in s:
+        m, banter = makeBanter(banter, u)
+        rp = storeResponse(s.replace(nick, '%'))
+        if rp:
+            chat(sock, channel, ('come up with something new, %s' % u))
+        else:
+            chat(sock, channel, m)
+    else:
+        detect = False
+    return m, detect, q, count
 
 
 def main():

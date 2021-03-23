@@ -1446,7 +1446,6 @@ disposedly
 disposingly
 dispraisingly
 disproportionably
-disproportionally
 disproportionately
 disputably
 disputatiously
@@ -1844,7 +1843,6 @@ extremely
 extrinsically
 exuberantly
 exultantly
-exultingly
 fabulously
 facetiously
 facially
@@ -2570,7 +2568,6 @@ immaculately
 immanely
 immanence
 immanently
-immaterially
 immaturely
 immeasurably
 immediately
@@ -3800,7 +3797,6 @@ originally
 ornamentally
 ornately
 ornithologically
-orthogonally
 orthographically
 osmotically
 ostensibly
@@ -4564,7 +4560,6 @@ round-the-clock
 roundabout
 roundly
 rousingly
-routinely
 rowdily
 royally
 rubrically

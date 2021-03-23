@@ -13,8 +13,8 @@ noun = getNoun()
 adv = getAdv()
 conj = getConj()
 banter = getBanter()
-cumBank = makeCumbank()
-cumResponse = ['*cums*', '*ejaculates*', '*cries*', '*orgasms*']
+
+
 
 f = open(filedialog.askopenfilename(title="Select a Bot Profile",
                                     filetypes=(("Text files",
@@ -62,6 +62,7 @@ q = False
 count = random.randint(countMin, countMax)
 m, epic = makeStr(randrange(20), adj, verb, adv, noun, epic, conj, logLs)
 chat(sock, channel, m)
+
 while not q:
     print(count)
     s = ''
@@ -75,34 +76,12 @@ while not q:
         s = l[2].replace('\n', '').replace('\r', '').lower()
         if 'twitch.tv' in s or 'Welcome, GLHF!' in s:
             s = ''
-    if 'time for bed %s' % nick in s:
-        q = True
-        chat(sock, channel, "cya nerds")
-    elif 'do not say that again %s' % nick in s:
-        chat(sock, channel, "ok libtard.")
-        deletePhrase(m)
-    elif 'say something %s' % nick in s:
-        count = 0
-    elif 'say something smart %s' % nick in s:
-        m = makeSmart(adj, adv, verb, noun, conj)
-        chat(sock, channel, m)
-    elif '%s say something about ' % nick in s:
-        phrase = s.replace('%s say something about ' % nick, '')
-        m = makeAbout(phrase)
-        chat(sock, channel, m)
-    elif '%s say something new' % nick in s:
-        m = phraseMutator(2)
-        chat(sock, channel, m)
-    elif cumCheck(s, cumBank):
-        m = cumResponse[randrange(len(cumResponse))]
-        chat(sock, channel, m)
-    elif nick in s:
-        m, banter = makeBanter(banter, u)
-        rp = storeResponse(s.replace(nick, '%'))
-        if rp:
-            chat(sock, channel, ('come up with something new, %s' % u))
-        else:
-            chat(sock, channel, m)
+    else:
+        u = ''
+        s = ''
+    m, detect, q, count = cheembisParser(s, nick, sock, channel, adj, adv, verb, noun, conj, banter, u, m, count)
+    if detect:
+        print("parser responded.")
     elif len(s) > 2:
         unique = True
         for phrase in logLs:

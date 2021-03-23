@@ -2585,7 +2585,6 @@ Elsinore
 Elspet
 Elspeth
 Elton
-Elvira
 Elvis
 Elwyn
 Ely
@@ -6275,7 +6274,6 @@ Pandarus
 Pandion
 Pangaea
 Panhellenism
-Panjabi
 Pankhurst
 Pantagruel
 Pantagruelism
@@ -6753,7 +6751,6 @@ Quebec
 Quebecer
 Quebecers
 Quechua
-Quechuan
 Quechuas
 Queen-Anne
 Queensland
@@ -18128,7 +18125,6 @@ buna
 bunce
 bunces
 bunch
-bunches
 bunchiness
 bunco
 buncombe
@@ -26977,7 +26973,6 @@ cyathium
 cyathiums
 cyathus
 cyathuses
-cyberneticist
 cyberneticists
 cybernetics
 cyberspace
@@ -28908,7 +28903,6 @@ deteriorations
 determent
 determents
 determinability
-determinableness
 determinant
 determinants
 determination
@@ -30169,7 +30163,6 @@ dispraisers
 dispraises
 disproof
 disproofs
-disproportion
 disproportionableness
 disproportionateness
 disproportions
@@ -55649,7 +55642,6 @@ molding
 moldings
 molds
 moldwarp
-moldwarps
 mole
 molecularity
 molecule
@@ -60440,7 +60432,6 @@ paella
 paellas
 paenula
 paenulas
-paeon
 paeonies
 paeons
 paeony
@@ -64369,7 +64360,6 @@ pneumonectomies
 pneumonectomy
 pneumonia
 pneumonitis
-pneumonoultramicroscopicsilicovolcanoconiosis
 pneumothorax
 poa
 poacher
@@ -65526,7 +65516,6 @@ predestinarianism
 predestinarians
 predestination
 predetermination
-predeterminer
 predeterminers
 predevelopment
 predevelopments
@@ -67688,7 +67677,6 @@ quarrels
 quarrelsomeness
 quarrian
 quarrians
-quarrier
 quarriers
 quarries
 quarry
@@ -82875,7 +82863,6 @@ textuary
 texture
 textures
 thack
-thacks
 thalamencephalon
 thalamus
 thalassaemia
@@ -86834,7 +86821,6 @@ unwillingness
 unwisdom
 unwiseness
 unwit
-unwittingness
 unwontedness
 unworldliness
 unworthiness
