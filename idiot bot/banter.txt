@@ -27,9 +27,6 @@ fix your posture, %.
 hey % how's your day going
 hey % how is your day going
 sup %
-sup %
-yo %
-yo %
 % was referring to ur parrying ur sleep schedule
 % has the brain of 10 hamsters
 % what is your favorite thing to put on bread
@@ -49,12 +46,15 @@ die %
 *has mystic eyes of death perception* sup %
 % gives me coniptions
 that;s not nice, %
-%, split some facts!
 bazinga %
 i want % to say bazinga too
 i"m coming for u %
-% it too cool
-dont say that again %
-% say something smart
-say something new %
-% do not say that again
+go to sleep %
+go to bed %
+jfc %
+% how was ur day
+% tell me something about nate
+% tell me about memes
+this is a good stream for me to bugfix %
+% say funny
+i wanna play with %

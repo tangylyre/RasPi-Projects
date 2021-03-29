@@ -1,0 +1,9 @@
+irc.chat.twitch.tv
+6667
+cheembis
+oauth:oywsoykd6mfwtt6q9xow39jb7ambkg
+#crandadtwitch
+10
+5
+20
+

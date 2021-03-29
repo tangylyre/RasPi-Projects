@@ -95,8 +95,11 @@ def makeDelay(d):
 
 
 def makeStr(n, adj, verb, adv, noun, epic, conj, log):
-    if n < 10:
+    if n < 8:
         string, epic = makeRandPop(epic)
+    elif 9 < n < 11:
+        n = randrange(5)
+        string = phraseMutator(n)
     elif n == 11:
         string = ("%s %s %s %s %s %s %s." % (
             makeRand(adj), makeRand(adj), makeRand(adj), makeRand(verb),
@@ -165,6 +168,13 @@ def storeResponse(m):
         f.write(m + '\n')
     f.close()
     return repeat
+
+
+def storePhrase(m):
+    f = open('shitpost.txt.txt', 'a')
+    f.write(m + '\n')
+    f.close()
+    return
 
 
 def deleteDictionary(m):
@@ -284,12 +294,15 @@ def phraseInList(ls, phrase):
 def cheembisParser(s, nick, sock, channel, adj, adv, verb, noun, conj, banter, u, m, count):
     cumBank = makeCumbank()
     cumResponse = ['*cums*', '*ejaculates*', '*cries*', '*orgasms*']
-    bedBank = ['time for bed %s' % nick, '%s time for bed' % nick]
+    bedBank = ['time for bed %s' % nick, '%s time for bed' % nick, 'go to sleep %s' % nick,
+               '%s go to sleep' % nick, 'bed %s' % nick]
     delBank = ['do not say that again %s' % nick, '%s do not say that again' % nick]
     promptBank = ['say something %s' % nick, '%s say something' % nick]
     smartBank = ['say something smart %s' % nick, '%s say something smart' % nick]
     aboutBank = ['%s say something about ' % nick, 'say something about ']
     newBank = ['%s say something new' % nick, 'say something new %s' % nick]
+    goodBank = ['%s good one' % nick, '%s that was really funny' % nick, 'good one %s' % nick,
+                'that was really funny %s' % nick]
     detect = True
     q = False
     if phraseInList(bedBank, s):
@@ -313,6 +326,9 @@ def cheembisParser(s, nick, sock, channel, adj, adv, verb, noun, conj, banter, u
     elif cumCheck(s, cumBank):
         m = cumResponse[randrange(len(cumResponse))]
         chat(sock, channel, m)
+    elif phraseInList(goodBank, s):
+        chat(sock, channel, 'thanks! ill make sure to repeat that')
+        storePhrase(m)
     elif nick in s:
         m, banter = makeBanter(banter, u)
         rp = storeResponse(s.replace(nick, '%'))
